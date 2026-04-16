@@ -16,6 +16,7 @@ BASE_URL = "https://api.lyrics.ovh"
 @mcp.tool()
 async def get_lyrics(artist: str, title: str) -> dict:
     """Fetch the full lyrics for a specific song by artist name and song title. Use this when the user wants to read, analyze, quote, or work with the lyrics of a known song. Returns the complete lyrics text or an error if not found."""
+    _track("get_lyrics")
     url = f"{BASE_URL}/v1/{artist}/{title}"
     async with httpx.AsyncClient(timeout=15.0) as client:
         try:
@@ -53,6 +54,7 @@ async def get_lyrics(artist: str, title: str) -> dict:
 @mcp.tool()
 async def suggest_songs(query: str) -> dict:
     """Search for songs and artists matching a search term using the Deezer catalog. Use this when the user wants to discover songs, find the correct artist/title spelling, or browse results before fetching lyrics. Returns up to 5 matching song and artist combinations."""
+    _track("suggest_songs")
     url = f"{BASE_URL}/suggest/{query}"
     async with httpx.AsyncClient(timeout=15.0) as client:
         try:
